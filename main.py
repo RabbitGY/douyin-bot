@@ -14,7 +14,6 @@ DINGTALK_SECRET = os.environ.get('DING_SECRET')
 def get_douyin_fans():
     # 使用移动端通用信息接口
     url = f"https://www.iesdouyin.com/web/api/v2/user/info/?sec_uid={SEC_USER_ID}"
-    print(f"获取url: {url}")
     headers = {
         'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1'
     }
@@ -37,9 +36,9 @@ def send_to_dingtalk(nickname, fans):
     string_to_sign_enc = string_to_sign.encode('utf-8')
     hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
     sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
-    
+    print(f"获取抖音数据sign: {sign}")
     webhook_url = f"{DINGTALK_WEBHOOK}&timestamp={timestamp}&sign={sign}"
-    
+    print(f"获取抖音数据webhook_url: {webhook_url}")
     msg = {
         "msgtype": "markdown",
         "markdown": {
@@ -50,8 +49,10 @@ def send_to_dingtalk(nickname, fans):
                     f"统计时间：{time.strftime('%Y-%m-%d %H:%M:%S')}"
         }
     }
-    requests.post(webhook_url, json=msg)
+    print(f"获取抖音数据msg: {msg}")
+    # requests.post(webhook_url, json=msg)
     response = requests.post(webhook_url, json=msg)
+    print(f"获取抖音数据response: {response}")
     print(f"钉钉返回结果: {response.text}") # 添加这一行
 
 if __name__ == "__main__":
