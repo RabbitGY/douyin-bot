@@ -27,4 +27,5 @@ jobs:
           SEC_USER_ID: ${{ secrets.SEC_USER_ID }}
           DING_WEBHOOK: ${{ secrets.DING_WEBHOOK }}
           DING_SECRET: ${{ secrets.DING_SECRET }}
+          TZ: Asia/Shanghai
         run: python main.py
