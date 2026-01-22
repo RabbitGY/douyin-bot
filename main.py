@@ -49,6 +49,8 @@ def send_to_dingtalk(nickname, fans):
         }
     }
     requests.post(webhook_url, json=msg)
+    response = requests.post(webhook_url, json=msg)
+    print(f"钉钉返回结果: {response.text}") # 添加这一行
 
 if __name__ == "__main__":
     name, count = get_douyin_fans()
